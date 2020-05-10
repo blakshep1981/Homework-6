@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+  
+
+  <div class="container">
+    <header>Weather Dashboard</header>
+
+  <div class="container">
+   
+    <div class="row">
+    
+      <div class="column">
+      <form id="city-form"></form>
+      <label for="city-input">Search for a City:</label>
+      <br>
+      <input type="text" id="city-input"><br>
+
+
+      <input id="find-city" type="submit" value="Search">
+    </div>
+    
+    
+
+
+    <div id="city-view"></div>
+    
+    <div class="column">
+    <div class="city"></div>
+    <div class="wind"></div>
+    <div class="humidity"></div>
+    <div class="uv index"></div>
+    <div class="tempF"></div>
+  </div>
+  </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+      $("#find-city").on("click", function (event) {
+
+
+
+        event.preventDefault();
+
+
+        var city = $("#city-input").val();
+
+
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=533e8e49de697a70004be1e380773c43&units=imperial";
+
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function (response) {
+
+          console.log(response)
+
+          $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+          $(".wind").text("Wind Speed: " + response.wind.speed);
+          $(".humidity").text("Humidity: " + response.main.humidity);
+
+          
+          
+       
+        $(".tempF").text("Temperature (F) " + response.main.temp);
+          
+          var day1 = response.list[0]
+          var day2 = response.list[9]
+          var day3 = response.list[18]
+          var day4 = response.list[27]
+          var day5 = response.list[36]
+
+          $("#city-view").text(JSON.stringify([day1, day2, day3, day4, day5]));
+        });
+
+      });
+    </script>
+  </div>
+</body>
+
+</html>

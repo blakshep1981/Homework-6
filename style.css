@@ -1,0 +1,15 @@
+header {
+    background-color:rgb(46, 40, 40);
+    color: white;
+    text-align: center;
+    font-size: 75px;   
+}
+
+button {
+    background-color: aqua;
+    color: white;
+}
+.column {
+    float: left;
+    padding: 15px;
+}
